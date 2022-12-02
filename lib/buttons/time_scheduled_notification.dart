@@ -19,20 +19,23 @@ class _TimeSchedulesNotificationState extends State<TimeSchedulesNotification> {
     _notificationService.initialiseNotification();
   }
 
+  DateTime dateTime = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        TimeOfDay? time = await showTimePicker(
-            context: context, initialTime: TimeOfDay.now());
-        log("notification scheduled");
+        dateTime = (await showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2000),
+            lastDate: DateTime.now()))!;
+
         _notificationService.scheduleWithTime(
           "I am scheduled to every minute",
           "Yes i am schedules",
-          Duration(
-            minutes: time!.minute,
-            hours: time.hour,
-          ).inSeconds,
+          dateTime,
+          'scheduled',
         );
       },
       child: const Text(

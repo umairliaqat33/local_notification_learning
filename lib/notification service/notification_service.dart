@@ -64,7 +64,7 @@ class NotificationService {
     );
   }
 
-  void scheduleWithTime(String title, String body, int seconds) {
+  void scheduleWithTime(String title, String body, DateTime dateTime,String payload,) {
     AndroidNotificationDetails androidNotificationDetails =
         const AndroidNotificationDetails(
       "channelId",
@@ -80,13 +80,12 @@ class NotificationService {
       0,
       title,
       body,
-      tz.TZDateTime.now(tz.local).add(
-        Duration(seconds: seconds),
-      ),
+      tz.TZDateTime.from(dateTime, tz.local),
       notificationDetails,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       androidAllowWhileIdle: true,
+      payload:payload,
     );
   }
 
