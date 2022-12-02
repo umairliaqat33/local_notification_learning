@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:notification/notification%20service/notification_service.dart';
 
@@ -25,12 +23,25 @@ class _TimeSchedulesNotificationState extends State<TimeSchedulesNotification> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        dateTime = (await showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(2000),
-            lastDate: DateTime.now()))!;
-
+        DateTime date = (await showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime.now(),
+              lastDate: DateTime(2023),
+            ) ??
+            DateTime.now());
+        TimeOfDay time = await showTimePicker(
+              context: context,
+              initialTime: TimeOfDay.now(),
+            ) ??
+            TimeOfDay.now();
+        dateTime = DateTime(
+          date.year,
+          date.month,
+          date.day,
+          time.hour,
+          time.minute,
+        );
         _notificationService.scheduleWithTime(
           "I am scheduled to every minute",
           "Yes i am schedules",

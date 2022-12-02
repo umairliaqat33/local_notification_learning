@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -81,6 +83,7 @@ class NotificationService {
     NotificationDetails notificationDetails = NotificationDetails(
       android: androidNotificationDetails,
     );
+
     _flutterLocalNotificationsPlugin.zonedSchedule(
       0,
       title,

@@ -3,6 +3,7 @@ import 'package:notification/buttons/push_notification.dart';
 import 'package:notification/buttons/schedule_notification.dart';
 import 'package:notification/buttons/stop_notification.dart';
 import 'package:notification/buttons/time_scheduled_notification.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 
 void main() {
   runApp(const MyApp());
@@ -33,6 +34,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  void initState() {
+    super.initState();
+    tz.initializeTimeZones();
+  }
 
   @override
   Widget build(BuildContext context) {
